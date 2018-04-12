@@ -1,0 +1,11 @@
+var app=require('../app');
+var wwwdebug=require('debug')('exdebug:www');
+var ljb=require('debug')('exdebug:ljb');
+
+var http=require('http');
+var port=require('../config/index.js');
+app.set('port',port);
+var server=http.createServer(app);
+server.listen(port);
+// server.on('error',onError);
+// server.on('listening',onListening);

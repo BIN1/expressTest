@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="banerBtn">GET Banner</button>
+    <button id="addressBTN">获取地址</button>
+</body>
+<script src="../js/jquery-3.2.1.js"></script>
+<script src="../js/ajax.js"></script>
+<script>
+    $(function(){
+        var banerBtn=document.getElementById('banerBtn');
+        var params={
+            status:1,
+            type:1,
+            is_del:0
+        };
+        banerBtn.onclick=function(){
+            var url='/api/subject/get/banner';
+            $.ajax({
+                method:'GET',
+                url:url,
+                data:params
+            }).done(function(msg){
+                console.log(msg.result);
+            }).fail(function(error){
+                console.log(error);
+            })
+        };
+        $('#addressBTN').on('click',function() {
+            var url='/api/subject/post/address';
+            $.ajax({
+                method:'post',
+                url:url,
+                data:{id:1}
+            }).done(function(res){
+                console.log(res);
+            }).fail(function(error) {
+                console.log(error)
+            })
+        })
+    })
+</script>
+</html>

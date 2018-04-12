@@ -1,0 +1,26 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "cross-env NODE_ENV=pro nodemon ./bin/www",
+    "dev": "cross-env NODE_ENV=dev nodemon ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "jade": "^1.11.0",
+    "moment": "^2.22.0",
+    "morgan": "^1.9.0",
+    "mysql": "^2.15.0",
+    "sequelize": "^4.37.6",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.1.4",
+    "minimist": "^1.2.0",
+    "mysql": "^2.15.0"
+  }
+}
