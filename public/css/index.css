@@ -24,7 +24,9 @@ label{
 #box{
     position: relative;height: 100%;
 }
-#loginBtn,#registerBtn {
+#loginBtn,
+#registerBtn,
+#ediPwd {
     width: 40px;
     height: 40px;
     border: 1px solid #ededed;
@@ -41,4 +43,7 @@ label{
 }
 #registerBtn {
     bottom: 56px;
+}
+#ediPwd{
+    bottom: 106px;
 }

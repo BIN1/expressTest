@@ -17,6 +17,9 @@
             <div id="registerBtn">
                 注册
             </div>
+            <div id="ediPwd">
+                修改
+            </div>
         </div>
     </div>
 </body>
@@ -29,7 +32,12 @@
         });
         $('#registerBtn').on('click',function(){
             window.location.href='http://172.16.4.31:3000/html/register.html';
+        });
+        $('#ediPwd').on('click',function(){
+            window.location.href='http://172.16.4.31:3000/html/editPwd.html';
         })
+        var userInfo=JSON.parse(localStorage.getItem('userInfo'));
+        console.log(userInfo);
     })
 </script>
 </html>

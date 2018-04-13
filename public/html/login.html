@@ -26,6 +26,7 @@
     </div>
 </body>
 <script src="../js/jquery-3.2.1.js"></script>
+<script src="../js/layer.js"></script>
 <script>
     $(function(){
         var banerBtn=document.getElementById('banerBtn');
@@ -43,10 +44,11 @@
                 url:url,
                 data:params
             }).done(function(msg){
+                layer.msg(msg.message);
                 if(msg.statusCode==200){
+                    localStorage.setItem('userInfo',JSON.stringify(msg.result[0]));
                     window.location.href='http://172.16.4.31:3000/html/index.html';
                 }
-                console.log(msg)
             }).fail(function(error){
 
             })

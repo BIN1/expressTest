@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../css/common.css" rel="stylesheet">
+    <link href="../css/login.css" rel="stylesheet">
+    <title>修改密码</title>
+</head>
+<body>
+    <div class="content-center">
+        <header>
+                <span id="back">🔙</span>
+                修改密码
+            </header>
+        <form id="login">
+            <label>
+                <span>账号：</span><input name="mobile" type="text">
+            </label>
+            <label>
+                <span>旧密码：</span><input  name="oldpassword" type="text">
+            </label>
+            <label>
+                <span>新密码：</span><input name="password" type="password">
+            </label>
+            <div id="loginBtn">确认修改</div>
+        </form>
+    </div>
+</body>
+<script src="../js/jquery-3.2.1.js"></script>
+<script src="../js/layer.js"></script>
+<script>
+    $(function(){
+        $('#loginBtn').on('click',function(){
+            var formDatas=$('form').serializeArray();
+            var params={};
+            var id=JSON.parse(localStorage.getItem('userInfo')).id;
+            params.id=id;
+            $.each(formDatas,function(){
+                params[this.name]=this.value;
+            });
+            params=JSON.stringify(params);
+            params=JSON.parse(params);
+            var url='/api/subject/post/editPassword';
+            $.ajax({
+                url:url,
+                data:params,
+                method:'POST'
+            }).done(function(res){
+                if(res.statusCode==200){
+                    layer.msg('密码修改成功');
+                    window.location.href='http://172.16.4.31:3000/html/index.html';
+                }else{
+                    layer.msg(res.message);
+                }
+                console.log(res);
+            }).fail(function(err){
+                console.log(err);
+            })
+            console.log(params);
+        })
+    })
+</script>
+</html>

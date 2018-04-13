@@ -98,11 +98,42 @@ const userRegister=(req,res) => {
             }
         })
     })()
+};
+
+const editPassword=(req,res) => {
+    (async() => {
+        const {mobile,oldpassword,password,id}=req.body;
+        let oldSql = `SELECT * FROM express_user where mobile=${mobile} and password=${oldpassword}`;
+        await connection.query(oldSql,function(err,rows,fields) {
+            if(rows){
+                if(rows[0].password!=oldpassword){
+                    console.log('a')
+                    res.status(200).json({
+                        statusCode:400,
+                        message:'账号或密码错误',
+                        result:null
+                    })
+                }else{
+                    connection.query(`update express_user set password='${password}' where id=${id}`,function(err,newRows,fields){
+                        console.log(`update express_user set password=${password} where id=${id}`);
+                        res.status(200).json({
+                            statusCode:200,
+                            message:'success',
+                            result:newRows
+                        });
+                    });
+                }
+            }else{
+                console.log(err)
+            };
+        })
+    })()
 }
 module.exports = {
   getBanner,
   addAddress,
   indexData,
   userData,
-  userRegister
+  userRegister,
+  editPassword
 };
