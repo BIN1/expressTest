@@ -1,0 +1,44 @@
+*{
+    margin: 0px;padding: 0px;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+}
+#login{
+    width: 320px;
+    height: 568px;
+    border: 1px solid #ededed;
+    box-shadow: 0 0 4px #999;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    padding: 12px;
+}
+label{
+    display: block;
+}
+#box{
+    position: relative;height: 100%;
+}
+#loginBtn,#registerBtn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ededed;
+    box-shadow: 0 0 4px #999;
+    background: #44ce79;
+    border-radius: 50%;
+    line-height: 40px;
+    text-align: center;
+    color:#fff;
+    font-size: 14px;
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+}
+#registerBtn {
+    bottom: 56px;
+}

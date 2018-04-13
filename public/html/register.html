@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/register.css">
+    <title>注册</title>
+</head>
+<body>
+    <div id="register" class="content-center">
+        <header>
+            <span id="back">🔙</span>
+            注册页
+        </header>
+        <form>
+            <label>
+                <span>用户名：</span>
+                <input type="text" name="user_name" >
+            </label>
+            <label>
+                <span>手机号：</span>
+                <input  name="mobile" type="text">
+            </label>
+            <label>
+                <span>密码：</span>
+                <input name="password" type="password">
+            </label>
+            <div id="rgBtn">注册</div>
+        </form>
+    </div>
+</body>
+<script src="../js/jquery-3.2.1.js"></script>
+<script>
+    $(function() {
+        $('#back').on('click',function(){
+            history.go(-1);
+        });
+        var url='/api/subject/post/userRegister';
+        $('#rgBtn').on('click',function(){
+            var datas=$('form').serializeArray();
+            var params={};
+            $.each(datas,function(){
+                params[this.name]=this.value;
+            });
+            params=JSON.stringify(params);
+            params=JSON.parse(params);
+            $.ajax({
+                method:'POST',
+                url:url,
+                data:params
+            }).done(function(res){
+                console.log(res);
+                if(res.statusCode==200){
+                    alert('注册成功,1s后跳到首页');
+                    setTimeout(() => {
+                        window.location.href='http://172.16.4.31:3000/html/index.html';
+                    }, 1000);
+                }
+            }).fail(function(error){
+                console.log(error)
+            })
+        });
+    })
+</script>
+</html>

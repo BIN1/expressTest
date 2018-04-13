@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/common.css">
+    <link href="../css/login.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="content-center">
+        <header>
+                <span id="back">🔙</span>
+                登入
+            </header>
+        <form id="login">
+            <label>
+                <span>账号：</span><input id="username" name="mobile" type="text">
+            </label>
+            <label>
+                <span>密码：</span><input name="password" type="password">
+            </label>
+            <div id="loginBtn">登入</div>
+        </form>
+    </div>
+</body>
+<script src="../js/jquery-3.2.1.js"></script>
+<script>
+    $(function(){
+        var banerBtn=document.getElementById('banerBtn');
+        $('#loginBtn').on('click',function() {
+            var url='/api/subject/post/userData';
+            var params={};
+            var t = $('form').serializeArray();
+            $.each(t,function(){
+                params[this.name]=this.value;
+            });
+            params=JSON.stringify(params);
+            params=JSON.parse(params);
+            $.ajax({
+                method:'POST',
+                url:url,
+                data:params
+            }).done(function(msg){
+                if(msg.statusCode==200){
+                    window.location.href='http://172.16.4.31:3000/html/index.html';
+                }
+                console.log(msg)
+            }).fail(function(error){
+
+            })
+        });
+        $('#back').on('click',function(){
+            history.back(-1);
+        });
+    })
+</script>
+</html>

@@ -23,7 +23,6 @@ const addAddress=(req,res) => {
     (async() => {
         const {id}=req.body;
         let sqlFactory=`SELECT * from region where parent_id=${id}`;
-        
         await connection.query(sqlFactory,function(err,rows,fields){
             if(rows){
                 res.status(200).json({
@@ -37,7 +36,73 @@ const addAddress=(req,res) => {
         })
     })();
 }
+const indexData=(req,res) => {
+    (async() => {
+        const { type } = req.body;
+        let sqlBannerFactory = `SELECT * from banner_img where status=1 and type=${type} and is_del=0`;
+        let sqlPrcType = `SELECT * from banner_img where status=1 and type=1 and is_del=0`;
+        await connection.query(sqlPrcType,function(err,rows,fields){
+            if(rows){
+                console.log('productType');
+                res.status(200).json({
+                    statusCode:200,
+                    message:"success",
+                    result:{productType:rows}
+                })
+            }else{
+                console.log(err)
+            }
+        })
+    })()
+};
+
+const userData=(req,res) => {
+    (async() => {
+        const { mobile,password } = req.body;
+        let userSql = `SELECT * FROM express_user where mobile=${mobile}`;
+        await connection.query(userSql,function(err,rows,fields) {
+            if(rows){
+                if(rows[0].password!=password){
+                    res.status(200).json({
+                        statusCode:400,
+                        message:'账号或密码错误',
+                        result:null
+                    })
+                }else{
+                    res.status(200).json({
+                        statusCode:200,
+                        message:'success',
+                        result:rows
+                    })
+                }
+            }else{
+                console.log(err)
+            };
+        })
+    })()
+};
+
+const userRegister=(req,res) => {
+    (async() => {
+        const {mobile,password,user_name}=req.body;
+        let insetTo = `INSERT INTO express_user (mobile,password,user_name) value (${mobile},${password},"${user_name}")`;
+        await connection.query(insetTo,function(err,rows,fields){
+            if(rows){
+                res.status(200).json({
+                    statusCode:200,
+                    message:'success',
+                    result:rows
+                })
+            }else{
+                console.log(err)
+            }
+        })
+    })()
+}
 module.exports = {
   getBanner,
-  addAddress
+  addAddress,
+  indexData,
+  userData,
+  userRegister
 };
